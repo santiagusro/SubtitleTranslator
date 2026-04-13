@@ -70,7 +70,7 @@ public sealed class SubtitleMonitor
         }
         catch (OperationCanceledException)
         {
-            // Salida limpia cuando se llama Stop() o se cancela el token externo
+            
         }
         finally
         {
@@ -97,7 +97,7 @@ public sealed class SubtitleMonitor
         }
         catch (OperationCanceledException)
         {
-            throw; // Propagar para que RunLoopAsync haga la salida limpia
+            throw; 
         }
         catch (OcrException ex)
         {

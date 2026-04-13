@@ -72,10 +72,9 @@ public sealed class WindowsOcrEngine : IOcrEngine
         return result;
     }
 
-    /// <summary>
-    /// Convierte un System.Drawing.Bitmap al SoftwareBitmap que requiere Windows.Media.Ocr.
-    /// El pipeline: Bitmap → BMP en memoria → InMemoryRandomAccessStream → BitmapDecoder → SoftwareBitmap.
-    /// </summary>
+    /*  Convierte un System.Drawing.Bitmap al SoftwareBitmap que requiere Windows.Media.Ocr.
+        El pipeline: Bitmap → BMP en memoria → InMemoryRandomAccessStream → 
+                                                                BitmapDecoder → SoftwareBitmap.*/
     private static async Task<SoftwareBitmap> ConvertToSoftwareBitmapAsync(Bitmap bitmap)
     {
         using MemoryStream memoryStream = new();
@@ -88,7 +87,7 @@ public sealed class WindowsOcrEngine : IOcrEngine
         {
             writer.WriteBytes(imageBytes);
             await writer.StoreAsync();
-            writer.DetachStream(); // Evita que el writer cierre el stream al ser disposed
+            writer.DetachStream(); 
         }
 
         randomAccessStream.Seek(0);
