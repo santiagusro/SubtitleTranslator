@@ -1,0 +1,11 @@
+<Solution>
+  <Folder Name="/src/">
+    <Project Path="src/SubtitleTranslator.Core/SubtitleTranslator.Core.csproj" />
+    <Project Path="src/SubtitleTranslator.Infrastructure/SubtitleTranslator.Infrastructure.csproj" />
+    <Project Path="src/SubtitleTranslator.UI/SubtitleTranslator.UI.csproj" />
+  </Folder>
+  <Folder Name="/tests/">
+    <Project Path="tests/SubtitleTranslator.Core.Tests/SubtitleTranslator.Core.Tests.csproj" />
+    <Project Path="tests/SubtitleTranslator.Infrastructure.Tests/SubtitleTranslator.Infrastructure.Tests.csproj" />
+  </Folder>
+</Solution>
