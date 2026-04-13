@@ -26,6 +26,7 @@ public partial class MainForm : Form
 
     private async void btnStart_Click(object sender, EventArgs e)
     {
+        btnStart.Enabled = false;
         await _presenter.StartAsync();
 
         if (_overlayForm is null || _overlayForm.IsDisposed)

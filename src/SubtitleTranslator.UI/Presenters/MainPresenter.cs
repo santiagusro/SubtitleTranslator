@@ -2,6 +2,7 @@ using SubtitleTranslator.Core.Interfaces;
 using SubtitleTranslator.Core.Models;
 using SubtitleTranslator.Core.Services;
 using SubtitleTranslator.Infrastructure.Configuration;
+using SubtitleTranslator.UI;
 
 namespace SubtitleTranslator.UI.Presenters;
 
@@ -43,6 +44,20 @@ public sealed class MainPresenter
 
     public void ConfigureRegion()
     {
-        // TODO: abrir RegionSelectorForm, actualizar _settings.Region, llamar SaveSettings()
+        using RegionSelectorForm selector = new();
+        DialogResult result = selector.ShowDialog();
+
+        if (result != DialogResult.OK || selector.SelectedRegion is null)
+            return;
+
+        _settings.Region = selector.SelectedRegion;
+        SaveSettings();
+
+        CaptureRegion r = selector.SelectedRegion;
+        MessageBox.Show(
+            $"Región guardada: {r.Width} × {r.Height} px  (origen: {r.X}, {r.Y})",
+            "Región configurada",
+            MessageBoxButtons.OK,
+            MessageBoxIcon.Information);
     }
 }

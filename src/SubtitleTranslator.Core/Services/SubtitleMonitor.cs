@@ -88,7 +88,10 @@ public sealed class SubtitleMonitor
             using Bitmap bitmap = _screenCapturer.CaptureRegion(_settings.Region);
             string currentText = await _ocrEngine.ExtractTextAsync(bitmap);
 
-            if (string.IsNullOrWhiteSpace(currentText) || !_changeDetector.HasChanged(previousText, currentText))
+            if (string.IsNullOrWhiteSpace(currentText))
+                return string.Empty;
+
+            if (!_changeDetector.HasChanged(previousText, currentText))
                 return previousText;
 
             ct.ThrowIfCancellationRequested();
@@ -101,16 +104,19 @@ public sealed class SubtitleMonitor
         }
         catch (OcrException ex)
         {
+            Stop();
             OnErrorOccurred(ex);
             return previousText;
         }
         catch (TranslationException ex)
         {
+            Stop();
             OnErrorOccurred(ex);
             return previousText;
         }
         catch (Exception ex)
         {
+            Stop();
             OnErrorOccurred(ex);
             return previousText;
         }
